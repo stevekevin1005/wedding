@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import './style.scss'
+import './style.css'
 
 function ImageList() {
     const [list, setList] = useState([
@@ -45,7 +45,7 @@ function ImageList() {
     }, [])
 
     return (
-        <div className="image_list_wrapper">
+        <div className="image_list_page_wrapper">
             <div className="list">
                 {list &&
                     Array.isArray(list) &&
