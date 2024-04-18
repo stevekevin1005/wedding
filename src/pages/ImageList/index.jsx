@@ -58,7 +58,7 @@ function ImageList() {
                             }}>
                             <div className="tag">已下載</div>
                             <div className="image_wrap">
-                                <img src={data.path} />
+                                <img src={`https://party-line-bot.zeabur.app/${data.path}`} />
                             </div>
                             <p>{data.name}</p>
                         </div>
