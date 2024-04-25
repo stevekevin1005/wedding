@@ -23,8 +23,8 @@ function Home() {
         }
     }
 
-    const handleDanmaku = () => {
-        const danmakuWrapper = new Danmaku('#danmakuWrapper', { minGapWidth: 40 })
+    const initDanmaku = () => {
+        const danmakuWrapper = new Danmaku('#danmakuWrapper', { minGapWidth: 60 })
         danmakuElement.current = danmakuWrapper
     }
 
@@ -40,7 +40,7 @@ function Home() {
 
     useEffect(() => {
         handleWebSocket()
-        handleDanmaku()
+        initDanmaku()
     }, [])
 
     return (
@@ -53,7 +53,7 @@ function Home() {
                             if (danmakuElement.current) {
                                 const randomIndex = Math.floor(Math.random() * blessings.length)
                                 const blessingMessage = blessings[randomIndex]
-                                danmakuElement.current.push(blessingMessage, { color: '#fff' })
+                                danmakuElement.current.push(blessingMessage, { color: '#000' })
                             }
                         }}>
                         隨機發送一則訊息(測試用，正式版會移除)
