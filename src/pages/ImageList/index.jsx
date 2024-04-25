@@ -50,9 +50,11 @@ function ImageList() {
                 {list &&
                     Array.isArray(list) &&
                     list.map((data, index) => (
-                        <div
+                        <a
                             key={index}
                             className="image_box"
+                            download
+                            href={`https://party-line-bot.zeabur.app/${data.path}`}
                             onClick={() => {
                                 handlePostMark(data.id)
                             }}>
@@ -61,7 +63,7 @@ function ImageList() {
                                 <img src={`https://party-line-bot.zeabur.app/${data.path}`} />
                             </div>
                             <p>{data.name}</p>
-                        </div>
+                        </a>
                     ))}
             </div>
         </div>
