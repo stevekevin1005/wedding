@@ -45,20 +45,18 @@ function Home() {
 
     return (
         <div className="home_page_wrapper">
+            <button
+                className="test_message_btn"
+                onClick={() => {
+                    if (danmakuElement.current) {
+                        const randomIndex = Math.floor(Math.random() * blessings.length)
+                        const blessingMessage = blessings[randomIndex]
+                        danmakuElement.current.push(blessingMessage, { color: '#000' })
+                    }
+                }}>
+                隨機發送一則訊息(測試用，正式版會移除)
+            </button>
             <div className="danmaku_outerbox">
-                <div>
-                    <button
-                        className="test_message_btn"
-                        onClick={() => {
-                            if (danmakuElement.current) {
-                                const randomIndex = Math.floor(Math.random() * blessings.length)
-                                const blessingMessage = blessings[randomIndex]
-                                danmakuElement.current.push(blessingMessage, { color: '#000' })
-                            }
-                        }}>
-                        隨機發送一則訊息(測試用，正式版會移除)
-                    </button>
-                </div>
                 <div id="danmakuWrapper" className="danmaku_wrapper" ref={danmakuElement} />
             </div>
             <video className="video" ref={video} playsInline loop onClick={handlePlayVideo}>
