@@ -1,53 +1,27 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import './style.css'
+import { useSelector, useDispatch } from 'react-redux'
+import { setViewMode } from '../../store/actions/set'
+import { getImagesList } from '../../store/actions/get'
+import { isArray } from '../../functions/common'
+import WindowIcon from '@mui/icons-material/Window'
+import SquareRoundedIcon from '@mui/icons-material/SquareRounded'
 import wedding_banner from '../../images/wedding-banner.png'
+import ImageBox from '../../components/ImageBox'
+import DownloadGuide from '../../components/DownloadGuide'
 
 function ImageList() {
-    const [list, setList] = useState([
-        {
-            id: 0,
-            name: 'string',
-            path: 'string'
-        }
-    ])
+    const dispatch = useDispatch()
+    const viewMode = useSelector(state => state.set.viewMode)
+    const imagesList = useSelector(state => state.update.imagesList)
 
-    const getImageList = async () => {
-        try {
-            const response = await fetch('https://party-line-bot.zeabur.app/api/v1/images/list', { method: 'GET' })
-            if (response.ok) {
-                const result = await response.json()
-                setList(result)
-            }
-        } catch (error) {
-        } finally {
-        }
-    }
-
-    const postMark = async id => {
-        try {
-            const object = { id }
-            const response = await fetch('https://party-line-bot.zeabur.app/api/v1/images/mark', {
-                method: 'POST',
-                body: JSON.stringify(object)
-            })
-            if (response.ok) {
-                // success evnet
-            } else {
-                const errorMessage = await response.text()
-                console.log('error message:', errorMessage)
-            }
-        } catch (error) {
-        } finally {
-        }
-    }
-
-    const handleImageOrientation = e => {
-        const { naturalWidth, naturalHeight } = e.target
-        if (naturalHeight > naturalWidth) e.target.classList.add('vertical')
-    }
+    const viewModeList = [
+        { name: 'grid', icon: <WindowIcon style={{ fontSize: 36 }} /> },
+        { name: 'full', icon: <SquareRoundedIcon style={{ fontSize: 36 }} /> }
+    ]
 
     useEffect(() => {
-        getImageList()
+        dispatch(getImagesList())
     }, [])
 
     return (
@@ -56,37 +30,30 @@ function ImageList() {
                 <div className="top_banner shadow">
                     <img className="image_banner" src={wedding_banner} />
                     <div className="description_content">
-                        <h1 className="title">Lilly & Steve Wedding</h1>
-                        <p>請在此下載您的照片</p>
+                        <h1 className="title">Steve & Yen Wedding</h1>
+                        <p>請在此選取照片並下載後使用拍立得列印</p>
                     </div>
                 </div>
+                <div className="view_mode_content">
+                    {viewModeList.map((data, index) => (
+                        <div
+                            key={index}
+                            className={`view_button ${viewMode === data.name ? 'active' : ''}`}
+                            onClick={() => {
+                                dispatch(setViewMode(data.name))
+                            }}
+                        >
+                            {data.icon}
+                        </div>
+                    ))}
+                </div>
                 <div className="list_content">
-                    {list &&
-                        Array.isArray(list) &&
-                        list.map((data, index) => (
-                            <a
-                                key={index}
-                                className="image_box_wrapper"
-                                download
-                                href={`https://party-line-bot.zeabur.app/${data.path}`}
-                                onClick={() => {
-                                    postMark(data.id)
-                                }}
-                            >
-                                <div className="image_box_content shadow">
-                                    <div className="tag">已下載</div>
-                                    <div className="image_wrap">
-                                        <img
-                                            className="image"
-                                            src={`https://party-line-bot.zeabur.app/${data.path}`}
-                                            onLoad={handleImageOrientation}
-                                        />
-                                    </div>
-                                    <p className="name">{data.name}</p>
-                                </div>
-                            </a>
+                    {isArray(imagesList) &&
+                        imagesList.map((data, index) => (
+                            <ImageBox key={index} id={data.id} path={data.path} name={data.name} disabled={true} />
                         ))}
                 </div>
+                <DownloadGuide />
             </div>
         </div>
     )
