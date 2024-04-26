@@ -3,6 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
+        "@fontsource/noto-sans-lao": "^5.0.18",
         "@fontsource/noto-sans-tc": "^5.0.17",
         "net": "^1.0.2",
         "rc-danmaku": "^1.1.0",

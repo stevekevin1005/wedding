@@ -53,8 +53,9 @@ function Home() {
                         const blessingMessage = blessings[randomIndex]
                         danmakuElement.current.push(blessingMessage, { color: '#000' })
                     }
-                }}>
-                隨機發送一則訊息(測試用，正式版會移除)
+                }}
+            >
+                隨機發送一則訊息(測試用)
             </button>
             <div className="danmaku_outerbox">
                 <div id="danmakuWrapper" className="danmaku_wrapper" ref={danmakuElement} />

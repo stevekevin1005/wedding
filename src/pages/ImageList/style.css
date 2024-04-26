@@ -1,52 +1,109 @@
 .image_list_page_wrapper {
+    width: 100%;
+    min-height: 100vh;
     position: relative;
     padding: 20px;
+    background-color: #fef0f9;
 }
 
-.list {
+.image_list_page_wrapper .content {
+    max-width: 990px;
+    margin: 0 auto;
+}
+
+.image_list_page_wrapper .top_banner {
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.top_banner .image_banner {
+    margin-bottom: 12px;
+}
+
+.top_banner .description_content {
+    padding: 0 24px 24px 24px;
+}
+
+.top_banner .title {
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+
+.image_list_page_wrapper .list_content {
     display: flex;
     flex-wrap: wrap;
     margin: 0 -12px;
 }
 
-.image_box {
+.image_box_wrapper {
     width: 25%;
     padding: 0 12px;
-    margin-bottom: 12px;
+    margin-bottom: 24px;
     position: relative;
-    cursor: pointer;
     color: #000;
     text-decoration: none;
 }
 
-.image_box .tag {
+.image_box_content {
+    background-color: #fff;
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.image_box_content .tag {
     position: absolute;
-    border: 1px solid #e9e8e7;
+    border: 1px solid #dadce0;
     padding: 2px 12px;
     background-color: #fff;
     top: -5px;
-    right: -5px;
+    right: 0;
     border-radius: 50px;
     z-index: 1;
     font-size: 12px;
 }
 
-.image_box .image_wrap {
+.image_box_content .image_wrap {
     width: 100%;
     padding-bottom: 100%;
     position: relative;
     margin-bottom: 12px;
 }
 
-.image_box .image_wrap img {
+.image_box_content .image_wrap .image {
     position: absolute;
-    top: 0;
+    top: 50%;
+    left: 50%;
     width: 100%;
+    transform: translate(-50%, -50%);
+}
+
+.image_box_content .image_wrap .image.vertical {
+    width: auto;
     height: 100%;
 }
 
+.image_box_content .name {
+    font-size: 13px;
+}
+
 @media (max-width: 767px) {
-    .image_box {
+    .image_list_page_wrapper {
+        padding: 0;
+    }
+
+    .image_list_page_wrapper .list_content {
+        margin: 0;
+    }
+
+    .image_list_page_wrapper .top_banner {
+        border-radius: 0;
+    }
+
+    .image_box_wrapper {
         width: 50%;
     }
 }
