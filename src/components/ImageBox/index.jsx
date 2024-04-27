@@ -3,7 +3,7 @@ import './style.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSelectedImages } from '../../store/actions/set'
 
-function ImageBox({ id, path, name, disabled }) {
+function ImageBox({ id, path, name, downloaded, disabled }) {
     const dispatch = useDispatch()
     const viewMode = useSelector(state => state.set.viewMode)
     const selectedImages = useSelector(state => state.set.selectedImages)
@@ -17,10 +17,8 @@ function ImageBox({ id, path, name, disabled }) {
         const _selectedImages = [...selectedImages]
         const indexOfImages = _selectedImages.findIndex(data => data === id)
         if (indexOfImages === -1) {
-            // 新增
             _selectedImages.push(id)
         } else {
-            // 移除
             _selectedImages.splice(indexOfImages, 1)
         }
         dispatch(setSelectedImages(_selectedImages))
@@ -29,10 +27,12 @@ function ImageBox({ id, path, name, disabled }) {
     return (
         <div className={`image_box_wrapper ${viewMode}`}>
             <div
-                className={`image_box_content shadow ${selectedImages.includes(id) ? 'selected' : ''}`}
+                className={`image_box_content shadow ${selectedImages.includes(id) ? 'selected' : ''} ${
+                    disabled ? 'disabled' : ''
+                }`}
                 onClick={() => handleImage(id)}
             >
-                <div className="tag">已下載</div>
+                {disabled ? <div className="tag">已列印</div> : downloaded ? <div className="tag">已下載</div> : null}
                 <div className="image_wrap">
                     <img className="image" src={`https://party-line-bot.zeabur.app/${path}`} onLoad={_orientation} />
                 </div>

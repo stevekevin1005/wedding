@@ -14,6 +14,7 @@ function ImageList() {
     const dispatch = useDispatch()
     const viewMode = useSelector(state => state.set.viewMode)
     const imagesList = useSelector(state => state.update.imagesList)
+    const downloadedIds = useSelector(state => state.set.downloadedIds)
 
     const viewModeList = [
         { name: 'grid', icon: <WindowIcon style={{ fontSize: 36 }} /> },
@@ -50,8 +51,16 @@ function ImageList() {
                 <div className="list_content">
                     {isArray(imagesList) &&
                         imagesList.map((data, index) => (
-                            <ImageBox key={index} id={data.id} path={data.path} name={data.name} disabled={true} />
+                            <ImageBox
+                                key={index}
+                                id={data.id}
+                                path={data.path}
+                                name={data.name}
+                                downloaded={downloadedIds.includes(data.id)}
+                                disabled={false}
+                            />
                         ))}
+                    <ImageBox id={5} path="/example.jpg" name="marked images.jpg" disabled={true} />
                 </div>
                 <DownloadGuide />
             </div>

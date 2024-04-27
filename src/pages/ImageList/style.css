@@ -35,6 +35,7 @@
     display: flex;
     flex-wrap: wrap;
     margin: 0 -12px;
+    padding-bottom: 65px;
 }
 
 .view_mode_content {
@@ -69,7 +70,7 @@
 
     .image_list_page_wrapper .list_content {
         margin: 0;
-        padding-bottom: 80px;
+        padding-bottom: 86px;
     }
 
     .image_list_page_wrapper .top_banner {

@@ -2,7 +2,8 @@ import types from '../actions/actionTypes'
 
 export const initState = {
     viewMode: 'grid',
-    selectedImages: []
+    selectedImages: [],
+    downloadedIds: []
 }
 
 const set = (state = initState, action) => {
@@ -17,6 +18,12 @@ const set = (state = initState, action) => {
             return {
                 ...state,
                 selectedImages: action.array
+            }
+
+        case types.SET_DOWNLOADED_IDS:
+            return {
+                ...state,
+                downloadedIds: action.array
             }
 
         default:

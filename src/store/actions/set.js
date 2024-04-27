@@ -7,3 +7,7 @@ export const setViewMode = string => {
 export const setSelectedImages = array => {
     return { type: types.SET_SELECTED_IMAGES, array }
 }
+
+export const setDownloadedIds = array => {
+    return { type: types.SET_DOWNLOADED_IDS, array }
+}

@@ -2,31 +2,49 @@
     position: fixed;
     top: auto;
     bottom: 0;
-    left: 0;
+    left: 50%;
     width: 100%;
+    max-width: 990px;
     padding: 12px;
     background-color: #fff;
     border-radius: 5px 5px 0 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transform: translateY(101%);
+    transform: translateX(-50%) translateY(101%);
     transition: all 300ms;
 }
 
 .download_guide_wrapper.active {
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0);
 }
 
 .download_guide_wrapper .selected_text {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .download_guide_wrapper .download_btn {
     min-width: 120px;
-    padding: 12px;
+    padding: 8px 12px;
     background-color: #e1a5ec;
     color: #fff;
-    border-radius: 50px;
+    border-radius: 5px;
     border: 0;
+}
+
+@media (max-width: 767px) {
+    .download_guide_wrapper {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .download_guide_wrapper .selected_text {
+        margin-bottom: 8px;
+    }
+
+    .download_guide_wrapper .download_btn {
+        width: 100%;
+        min-width: 100%;
+    }
 }
