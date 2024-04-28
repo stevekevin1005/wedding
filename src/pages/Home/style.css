@@ -24,6 +24,8 @@
 
 .danmaku_wrapper .bullet-item-text {
     text-shadow: #fff 1px 0px 1px, #fff 0px 1px 1px, #fff 0px -1px 1px, #fff -1px 0px 1px !important;
+    font-family: 'Dela Gothic One' !important;
+    font-size: 36px !important;
 }
 
 .test_message_btn {
