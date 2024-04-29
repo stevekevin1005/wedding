@@ -7,7 +7,8 @@ import '@fontsource/noto-sans-lao/400.css'
 import '@fontsource/noto-sans-tc/400.css'
 import '@fontsource/noto-sans-tc/900.css'
 import '@fontsource/dancing-script'
-import '@fontsource/dela-gothic-one'
+import '@fontsource/potta-one'
+import '@fontsource/mochiy-pop-p-one'
 import './styles/global.css'
 
 ReactDOM.render(

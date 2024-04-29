@@ -27,9 +27,15 @@
 }
 
 .top_banner .title {
-    font-size: 24px;
+    font-size: 42px;
     margin-bottom: 12px;
     font-family: 'Dancing Script', cursive;
+    text-align: center;
+}
+
+.top_banner .subtitle {
+    font-size: 13px;
+    text-align: center;
 }
 
 .image_list_page_wrapper .list_content {
@@ -80,5 +86,9 @@
 
     .view_mode_content {
         display: flex;
+    }
+
+    .top_banner .title {
+        font-size: 36px;
     }
 }

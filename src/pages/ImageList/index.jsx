@@ -29,11 +29,11 @@ function ImageList() {
     return (
         <div className="image_list_page_wrapper">
             <div className="content">
-                <div className="top_banner shadow">
+                <div className="top_banner">
                     <img className="image_banner" src={wedding_banner} />
                     <div className="description_content">
                         <h1 className="title">Steve & Yen Wedding</h1>
-                        <p>請在此選取照片並下載後使用拍立得列印</p>
+                        <p className="subtitle">請在此選取照片並下載後使用拍立得列印</p>
                     </div>
                 </div>
                 <div className="view_mode_content">

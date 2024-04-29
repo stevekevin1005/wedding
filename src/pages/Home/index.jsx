@@ -9,6 +9,7 @@ function Home() {
     const video = useRef(null)
     const danmakuElement = useRef(null)
     const [isPlaying, setIsPlaying] = useState(false)
+    const danmakuTextColor = '#000'
 
     const handleWebSocket = () => {
         const socket = new WebSocket('wss://party-line-bot.zeabur.app/api/v1/danmaku/ws')
@@ -18,13 +19,13 @@ function Home() {
         socket.onmessage = event => {
             const message = event.data
             if (danmakuElement.current) {
-                danmakuElement.current.push(message, { color: '#fff' })
+                danmakuElement.current.push(message, { color: danmakuTextColor })
             }
         }
     }
 
     const initDanmaku = () => {
-        const danmakuWrapper = new Danmaku('#danmakuWrapper', { minGapWidth: 60 })
+        const danmakuWrapper = new Danmaku('#danmakuWrapper', { minGapWidth: 60, rowHeight: 60 })
         danmakuElement.current = danmakuWrapper
     }
 
@@ -51,7 +52,7 @@ function Home() {
                     if (danmakuElement.current) {
                         const randomIndex = Math.floor(Math.random() * blessings.length)
                         const blessingMessage = blessings[randomIndex]
-                        danmakuElement.current.push(blessingMessage, { color: '#000' })
+                        danmakuElement.current.push(blessingMessage, { color: danmakuTextColor })
                     }
                 }}
             >

@@ -27,7 +27,7 @@ function ImageBox({ id, path, name, downloaded, disabled }) {
     return (
         <div className={`image_box_wrapper ${viewMode}`}>
             <div
-                className={`image_box_content shadow ${selectedImages.includes(id) ? 'selected' : ''} ${
+                className={`image_box_content ${selectedImages.includes(id) ? 'selected shadow' : ''} ${
                     disabled ? 'disabled' : ''
                 }`}
                 onClick={() => handleImage(id)}
