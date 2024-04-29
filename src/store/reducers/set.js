@@ -1,6 +1,7 @@
 import types from '../actions/actionTypes'
 
 export const initState = {
+    isLoading: false,
     viewMode: 'grid',
     selectedImages: [],
     downloadedIds: []
@@ -8,6 +9,12 @@ export const initState = {
 
 const set = (state = initState, action) => {
     switch (action.type) {
+        case types.SET_IS_LOADING:
+            return {
+                ...state,
+                isLoading: action.boolean
+            }
+
         case types.SET_VIEW_MODE:
             return {
                 ...state,

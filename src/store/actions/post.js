@@ -1,4 +1,4 @@
-export const postMark = id => async dispatch => {
+export const postImagesMark = id => async dispatch => {
     try {
         const data = { id }
         const response = await fetch('https://party-line-bot.zeabur.app/api/v1/images/mark', {
@@ -10,6 +10,7 @@ export const postMark = id => async dispatch => {
         })
         if (response.ok) {
             // success event
+            console.log('done')
         } else {
             const errorMessage = await response.text()
             throw new Error('POST_MARK_FAILED ' + errorMessage)

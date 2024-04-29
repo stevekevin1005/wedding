@@ -1,7 +1,8 @@
 import React from 'react'
 import './style.css'
 import { useSelector, useDispatch } from 'react-redux'
-import { setDownloadedIds, setSelectedImages } from '../../store/actions/set'
+import { setDownloadedIds, setSelectedImages, setIsLoading } from '../../store/actions/set'
+import { postImagesMark } from '../../store/actions/post'
 import { isArray } from '../../functions/common'
 
 function DownloadGuide() {
@@ -30,6 +31,14 @@ function DownloadGuide() {
             })
             .catch(error => console.error(error))
             .finally(() => {
+                dispatch(setIsLoading(true))
+                Promise.all(selectedImages.map(id => dispatch(postImagesMark(id))))
+                    .catch(error => {
+                        console.error(error)
+                    })
+                    .finally(() => {
+                        dispatch(setIsLoading(false))
+                    })
                 const _downloadedIds = [...downloadedIds]
                 const _selectedImages = [...selectedImages]
                 const combined = _downloadedIds.concat(_selectedImages)

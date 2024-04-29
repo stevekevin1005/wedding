@@ -9,6 +9,7 @@ import SquareRoundedIcon from '@mui/icons-material/SquareRounded'
 import wedding_banner from '../../images/wedding-banner.png'
 import ImageBox from '../../components/ImageBox'
 import DownloadGuide from '../../components/DownloadGuide'
+import Loading from '../../components/Loading'
 
 function ImageList() {
     const dispatch = useDispatch()
@@ -64,6 +65,7 @@ function ImageList() {
                 </div>
                 <DownloadGuide />
             </div>
+            <Loading />
         </div>
     )
 }
