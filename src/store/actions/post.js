@@ -10,7 +10,6 @@ export const postImagesMark = id => async dispatch => {
         })
         if (response.ok) {
             // success event
-            console.log('done')
         } else {
             const errorMessage = await response.text()
             throw new Error('POST_MARK_FAILED ' + errorMessage)
