@@ -57,6 +57,7 @@ function ImageList() {
                                 id={data.id}
                                 path={data.path}
                                 name={data.name}
+                                serial={data.serial}
                                 downloaded={downloadedIds.includes(data.id)}
                                 disabled={false}
                             />

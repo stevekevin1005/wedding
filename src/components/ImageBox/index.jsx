@@ -3,7 +3,7 @@ import './style.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSelectedImages } from '../../store/actions/set'
 
-function ImageBox({ id, path, name, downloaded, disabled }) {
+function ImageBox({ id, path, name, serial, downloaded, disabled }) {
     const dispatch = useDispatch()
     const viewMode = useSelector(state => state.set.viewMode)
     const selectedImages = useSelector(state => state.set.selectedImages)
@@ -36,7 +36,8 @@ function ImageBox({ id, path, name, downloaded, disabled }) {
                 <div className="image_wrap">
                     <img className="image" src={`https://party-line-bot.zeabur.app/${path}`} onLoad={_orientation} />
                 </div>
-                <p className="name">{name}</p>
+                <p className="name">上傳者: {name}</p>
+                <p className="serial">相片編號: {serial}</p>
             </div>
         </div>
     )
