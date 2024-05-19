@@ -23,6 +23,7 @@ function DownloadGuide() {
         })
         dispatch(setDownloadedIds(_downloadedIds))
         dispatch(setSelectedImages([]))
+        sessionStorage.setItem('downloadedIds', JSON.stringify(_downloadedIds))
         return
         Promise.all(imageUrls.map(url => fetch(url).then(response => response.blob())))
             .then(blobs => {

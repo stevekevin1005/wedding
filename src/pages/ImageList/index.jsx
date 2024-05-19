@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import './style.css'
 import { useSelector, useDispatch } from 'react-redux'
-import { setViewMode } from '../../store/actions/set'
+import { setDownloadedIds, setViewMode } from '../../store/actions/set'
 import { getImagesList } from '../../store/actions/get'
 import { isArray } from '../../functions/common'
-import WindowIcon from '@mui/icons-material/Window'
-import SquareRoundedIcon from '@mui/icons-material/SquareRounded'
+// import WindowIcon from '@mui/icons-material/Window'
+// import SquareRoundedIcon from '@mui/icons-material/SquareRounded'
+import PrintDisabledIcon from '@mui/icons-material/PrintDisabled'
 import ReplayIcon from '@mui/icons-material/Replay'
 import wedding_banner from '../../images/banner.png'
 import ImageBox from '../../components/ImageBox'
@@ -22,6 +23,11 @@ function ImageList() {
 
     useEffect(() => {
         dispatch(getImagesList())
+        const _downloadedIds = sessionStorage.getItem('downloadedIds')
+        if (_downloadedIds) {
+            const a = JSON.parse(_downloadedIds)
+            dispatch(setDownloadedIds(a))
+        }
     }, [])
 
     return (
@@ -38,7 +44,7 @@ function ImageList() {
                     {viewModeList.map((data, index) => (
                         <div
                             key={index}
-                            className={`view_button ${viewMode === data.name ? 'active' : ''}`}
+                            className={`view_button active`}
                             onClick={() => {
                                 dispatch(getImagesList())
                             }}
@@ -46,6 +52,15 @@ function ImageList() {
                             {data.icon}
                         </div>
                     ))}
+                    <div
+                        className={`view_button active`}
+                        onClick={() => {
+                            sessionStorage.clear('downloadedIds')
+                            dispatch(setDownloadedIds([]))
+                        }}
+                    >
+                        <PrintDisabledIcon style={{ fontSize: 36 }} />
+                    </div>
                 </div>
                 <div className="list_content">
                     {isArray(imagesList) &&
