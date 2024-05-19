@@ -1,3 +1,5 @@
+import { getImagesList } from './get'
+
 export const postImagesMark = id => async dispatch => {
     try {
         const data = { id }
@@ -10,6 +12,7 @@ export const postImagesMark = id => async dispatch => {
         })
         if (response.ok) {
             // success event
+            dispatch(getImagesList())
         } else {
             const errorMessage = await response.text()
             throw new Error('POST_MARK_FAILED ' + errorMessage)

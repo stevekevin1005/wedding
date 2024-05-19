@@ -20,10 +20,11 @@ function DownloadGuide() {
             const url = `https://party-line-bot.zeabur.app/${path}`
             imageUrls.push(url)
             _downloadedIds.push(id)
+            dispatch(postImagesMark(id))
         })
-        dispatch(setDownloadedIds(_downloadedIds))
         dispatch(setSelectedImages([]))
-        sessionStorage.setItem('downloadedIds', JSON.stringify(_downloadedIds))
+        // dispatch(setDownloadedIds(_downloadedIds))
+        // sessionStorage.setItem('downloadedIds', JSON.stringify(_downloadedIds))
         return
         Promise.all(imageUrls.map(url => fetch(url).then(response => response.blob())))
             .then(blobs => {

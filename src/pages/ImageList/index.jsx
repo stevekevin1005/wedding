@@ -23,11 +23,6 @@ function ImageList() {
 
     useEffect(() => {
         dispatch(getImagesList())
-        const _downloadedIds = sessionStorage.getItem('downloadedIds')
-        if (_downloadedIds) {
-            const a = JSON.parse(_downloadedIds)
-            dispatch(setDownloadedIds(a))
-        }
     }, [])
 
     return (
@@ -52,7 +47,7 @@ function ImageList() {
                             {data.icon}
                         </div>
                     ))}
-                    <div
+                    {/* <div
                         className={`view_button active`}
                         onClick={() => {
                             sessionStorage.clear('downloadedIds')
@@ -60,7 +55,7 @@ function ImageList() {
                         }}
                     >
                         <PrintDisabledIcon style={{ fontSize: 36 }} />
-                    </div>
+                    </div> */}
                 </div>
                 <div className="list_content">
                     {isArray(imagesList) &&
@@ -71,7 +66,7 @@ function ImageList() {
                                 path={data.path}
                                 name={data.name}
                                 serial={data.serial}
-                                disabled={downloadedIds.includes(data.id)}
+                                disabled={data.status}
                             />
                         ))}
                 </div>
