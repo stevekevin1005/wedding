@@ -42,7 +42,10 @@ function ImageBox({ id, path, name, serial, downloaded, disabled }) {
                     />
                 </div>
                 <div className="desc_content">
-                    <p className="name">上傳者: {name}</p>
+                    <p className="name">
+                        上傳者:
+                        <p className="name_text">{name}</p>
+                    </p>
                     <p className="serial">相片編號: {serial}</p>
                 </div>
             </div>

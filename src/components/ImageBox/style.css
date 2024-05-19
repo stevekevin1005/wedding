@@ -76,6 +76,15 @@
 
 .image_box_content .name {
     font-size: 13px;
+    display: flex;
+    align-items: center;
+}
+
+.image_box_content .name_text {
+    width: 70%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-left: 4px;
 }
 
 .image_box_content .serial {
