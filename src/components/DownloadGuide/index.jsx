@@ -21,6 +21,7 @@ function DownloadGuide() {
         })
         const _selectedImages = [...selectedImages]
         dispatch(setDownloadedIds(_selectedImages))
+        dispatch(setSelectedImages([]))
         return
         Promise.all(imageUrls.map(url => fetch(url).then(response => response.blob())))
             .then(blobs => {
