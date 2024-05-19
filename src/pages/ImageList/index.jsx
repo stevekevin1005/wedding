@@ -6,7 +6,8 @@ import { getImagesList } from '../../store/actions/get'
 import { isArray } from '../../functions/common'
 import WindowIcon from '@mui/icons-material/Window'
 import SquareRoundedIcon from '@mui/icons-material/SquareRounded'
-import wedding_banner from '../../images/wedding-banner.png'
+import ReplayIcon from '@mui/icons-material/Replay'
+import wedding_banner from '../../images/banner.png'
 import ImageBox from '../../components/ImageBox'
 import DownloadGuide from '../../components/DownloadGuide'
 import Loading from '../../components/Loading'
@@ -17,10 +18,7 @@ function ImageList() {
     const imagesList = useSelector(state => state.update.imagesList)
     const downloadedIds = useSelector(state => state.set.downloadedIds)
 
-    const viewModeList = [
-        { name: 'grid', icon: <WindowIcon style={{ fontSize: 36 }} /> },
-        { name: 'full', icon: <SquareRoundedIcon style={{ fontSize: 36 }} /> }
-    ]
+    const viewModeList = [{ name: 'grid', icon: <ReplayIcon style={{ fontSize: 36 }} /> }]
 
     useEffect(() => {
         dispatch(getImagesList())
@@ -33,7 +31,7 @@ function ImageList() {
                     <img className="image_banner" src={wedding_banner} />
                     <div className="description_content">
                         <h1 className="title">Steve & Yen Wedding</h1>
-                        <p className="subtitle">請在此選取照片並下載後使用拍立得列印</p>
+                        <p className="subtitle">請在此長按儲存照片並使用拍立得列印</p>
                     </div>
                 </div>
                 <div className="view_mode_content">
@@ -42,7 +40,7 @@ function ImageList() {
                             key={index}
                             className={`view_button ${viewMode === data.name ? 'active' : ''}`}
                             onClick={() => {
-                                dispatch(setViewMode(data.name))
+                                dispatch(getImagesList())
                             }}
                         >
                             {data.icon}
@@ -58,11 +56,9 @@ function ImageList() {
                                 path={data.path}
                                 name={data.name}
                                 serial={data.serial}
-                                downloaded={downloadedIds.includes(data.id)}
-                                disabled={false}
+                                disabled={downloadedIds.includes(data.id)}
                             />
                         ))}
-                    <ImageBox id={5} path="/example.jpg" name="marked images.jpg" disabled={true} />
                 </div>
                 <DownloadGuide />
             </div>

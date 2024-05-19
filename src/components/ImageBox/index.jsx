@@ -34,10 +34,17 @@ function ImageBox({ id, path, name, serial, downloaded, disabled }) {
             >
                 {disabled ? <div className="tag">已列印</div> : downloaded ? <div className="tag">已下載</div> : null}
                 <div className="image_wrap">
-                    <img className="image" src={`https://party-line-bot.zeabur.app/${path}`} onLoad={_orientation} />
+                    <img
+                        id={`image${id}`}
+                        className="image"
+                        src={`https://party-line-bot.zeabur.app/${path}`}
+                        onLoad={_orientation}
+                    />
                 </div>
-                <p className="name">上傳者: {name}</p>
-                <p className="serial">相片編號: {serial}</p>
+                <div className="desc_content">
+                    <p className="name">上傳者: {name}</p>
+                    <p className="serial">相片編號: {serial}</p>
+                </div>
             </div>
         </div>
     )

@@ -78,6 +78,14 @@
     font-size: 13px;
 }
 
+.image_box_content .serial {
+    font-size: 13px;
+}
+
+.image_box_content .desc_content {
+    pointer-events: none;
+}
+
 @media (max-width: 767px) {
     .image_box_wrapper {
         width: 50%;

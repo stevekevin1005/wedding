@@ -19,13 +19,16 @@ function DownloadGuide() {
             const url = `https://party-line-bot.zeabur.app/${path}`
             imageUrls.push(url)
         })
+        const _selectedImages = [...selectedImages]
+        dispatch(setDownloadedIds(_selectedImages))
+        return
         Promise.all(imageUrls.map(url => fetch(url).then(response => response.blob())))
             .then(blobs => {
                 blobs.forEach((blob, index) => {
                     const imageUrl = URL.createObjectURL(blob)
                     const link = document.createElement('a')
                     link.href = imageUrl
-                    link.download = `image${index + 1}`
+                    link.download = `image${index + 1}.jpg`
                     link.click()
                 })
             })
@@ -52,7 +55,7 @@ function DownloadGuide() {
         <div className={`download_guide_wrapper shadow ${isArray(selectedImages) ? 'active' : ''}`}>
             <div className="selected_text">已選取 {selectedImages.length} 張</div>
             <button className="download_btn" onClick={handleDownload}>
-                下載圖片
+                標記為列印
             </button>
         </div>
     )

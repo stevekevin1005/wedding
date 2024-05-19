@@ -62,7 +62,7 @@ function Home() {
                 <div id="danmakuWrapper" className="danmaku_wrapper" ref={danmakuElement} />
             </div>
             <video className="video" ref={video} playsInline loop onClick={handlePlayVideo}>
-                <source src={video01} />
+                <source src="https://steveyanwedding.s3.ap-northeast-1.amazonaws.com/06.15+%E5%A9%9A%E7%B4%97%E6%8A%95%E5%B0%84%E5%BD%B1%E7%89%87.mp4" />
             </video>
             {!isPlaying && (
                 <div className="play_button" onClick={handlePlayVideo}>

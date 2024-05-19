@@ -12,6 +12,7 @@
         "@fontsource/potta-one": "^5.0.15",
         "@mui/icons-material": "^5.15.15",
         "@mui/material": "^5.15.15",
+        "html2canvas": "^1.4.1",
         "net": "^1.0.2",
         "rc-danmaku": "^1.1.0",
         "react": "^17.0.0",
