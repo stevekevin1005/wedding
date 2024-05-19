@@ -14,13 +14,14 @@ function DownloadGuide() {
     const handleDownload = () => {
         if (!isArray(selectedImages)) return
         const imageUrls = []
+        const _downloadedIds = [...downloadedIds]
         selectedImages.forEach(id => {
             const path = imagesList.find(item => item.id === id)?.path
             const url = `https://party-line-bot.zeabur.app/${path}`
             imageUrls.push(url)
+            _downloadedIds.push(id)
         })
-        const _selectedImages = [...selectedImages]
-        dispatch(setDownloadedIds(_selectedImages))
+        dispatch(setDownloadedIds(_downloadedIds))
         dispatch(setSelectedImages([]))
         return
         Promise.all(imageUrls.map(url => fetch(url).then(response => response.blob())))
