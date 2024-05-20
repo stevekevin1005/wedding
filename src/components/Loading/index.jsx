@@ -8,7 +8,7 @@ function Loading() {
 
     return (
         <div className={`loading_wrapper ${isLoading ? 'active' : ''}`}>
-            <ReactLoading type="spin" color="#e1a5ec" width={45} />
+            <ReactLoading type="spinningBubbles" color="var(--primary-color)" width={66} />
         </div>
     )
 }

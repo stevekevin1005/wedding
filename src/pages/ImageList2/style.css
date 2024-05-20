@@ -60,13 +60,15 @@
     align-items: center;
     cursor: pointer;
     color: #dfdfdf;
+    font-size: 13px;
+    border-bottom: 3px solid transparent;
 }
 
 .option_btn.active {
     color: var(--primary-color);
-    border-bottom: 2px solid var(--primary-color);
+    border-bottom: 3px solid var(--primary-color);
 }
 
 .main_wrap {
-    padding: 180px 15px 15px 15px;
+    padding: 180px 15px 115px 15px;
 }
