@@ -2,16 +2,11 @@ import React from 'react'
 import './style.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSelectedImages } from '../../store/actions/set'
+import DoneIcon from '@mui/icons-material/Done'
 
-function ImageBox({ id, path, name, serial, downloaded, disabled }) {
+function ImageBox({ id, path, name, serial, disabled }) {
     const dispatch = useDispatch()
-    const viewMode = useSelector(state => state.set.viewMode)
     const selectedImages = useSelector(state => state.set.selectedImages)
-
-    const _orientation = event => {
-        const { naturalWidth, naturalHeight } = event.target
-        if (naturalHeight > naturalWidth) event.target.classList.add('vertical')
-    }
 
     const handleImage = id => {
         const _selectedImages = [...selectedImages]
@@ -25,28 +20,31 @@ function ImageBox({ id, path, name, serial, downloaded, disabled }) {
     }
 
     return (
-        <div className={`image_box_wrapper ${viewMode}`}>
+        <div className="image_box_wrapper">
             <div
-                className={`image_box_content ${selectedImages.includes(id) ? 'selected shadow' : ''} ${
+                className={`image_box_content ${selectedImages.includes(id) ? 'selected' : ''} ${
                     disabled ? 'disabled' : ''
                 }`}
                 onClick={() => handleImage(id)}
             >
-                {disabled ? <div className="tag">已列印</div> : downloaded ? <div className="tag">已下載</div> : null}
                 <div className="image_wrap">
-                    <img
-                        id={`image${id}`}
-                        className="image"
-                        src={`https://party-line-bot.zeabur.app/${path}`}
-                        onLoad={_orientation}
-                    />
+                    {disabled && <div className="printed_tag">已列印</div>}
+                    {selectedImages.includes(id) && (
+                        <div className="selected_tag">
+                            <DoneIcon />
+                        </div>
+                    )}
+                    <img className="image" src={`https://party-line-bot.zeabur.app/${path}`} />
                 </div>
                 <div className="desc_content">
-                    <p className="name">
-                        上傳者:
-                        <span className="name_text">{name}</span>
-                    </p>
-                    <p className="serial">相片編號: {serial}</p>
+                    <div className="serial">
+                        <p className="subtitle">相片編號:</p>
+                        <p className="ellipsis_text">{serial}</p>
+                    </div>
+                    <div className="name">
+                        <p className="subtitle">上傳者:</p>
+                        <p className="ellipsis_text">{name}</p>
+                    </div>
                 </div>
             </div>
         </div>
