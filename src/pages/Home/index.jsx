@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './style.css'
 import Danmaku from 'rc-danmaku'
-import blessings from '../../functions/blessings'
-import video01 from '../../videos/video01.mp4'
 import playButtonImage from '../../images/play-button.png'
 
 function Home() {
@@ -46,18 +44,6 @@ function Home() {
 
     return (
         <div className="home_page_wrapper">
-            <button
-                className="test_message_btn"
-                onClick={() => {
-                    if (danmakuElement.current) {
-                        const randomIndex = Math.floor(Math.random() * blessings.length)
-                        const blessingMessage = blessings[randomIndex]
-                        danmakuElement.current.push(blessingMessage, { color: danmakuTextColor })
-                    }
-                }}
-            >
-                隨機發送一則訊息(測試用)
-            </button>
             <div className="danmaku_outerbox">
                 <div id="danmakuWrapper" className="danmaku_wrapper" ref={danmakuElement} />
             </div>

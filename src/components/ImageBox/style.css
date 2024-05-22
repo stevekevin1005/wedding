@@ -1,6 +1,8 @@
 .image_box_wrapper {
-    width: 100%;
+    width: 33.33%;
     position: relative;
+    padding: 0 12px;
+    margin-bottom: 24px;
 }
 
 .image_box_content {
@@ -113,4 +115,7 @@
 }
 
 @media (max-width: 767px) {
+    .image_box_wrapper {
+        width: 50%;
+    }
 }

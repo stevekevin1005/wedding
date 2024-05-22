@@ -1,25 +1,20 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './style.css'
 import { useSelector, useDispatch } from 'react-redux'
-import { setDownloadedIds, setViewMode } from '../../store/actions/set'
 import { getImagesList } from '../../store/actions/get'
+import { setSelectedImages } from '../../store/actions/set'
 import { isArray } from '../../functions/common'
-// import WindowIcon from '@mui/icons-material/Window'
-// import SquareRoundedIcon from '@mui/icons-material/SquareRounded'
-import PrintDisabledIcon from '@mui/icons-material/PrintDisabled'
-import ReplayIcon from '@mui/icons-material/Replay'
-import wedding_banner from '../../images/banner.png'
 import ImageBox from '../../components/ImageBox'
+import ReplayIcon from '@mui/icons-material/Replay'
+import CameraIcon from '@mui/icons-material/Camera'
+import PrintIcon from '@mui/icons-material/Print'
 import DownloadGuide from '../../components/DownloadGuide'
 import Loading from '../../components/Loading'
 
 function ImageList() {
     const dispatch = useDispatch()
-    const viewMode = useSelector(state => state.set.viewMode)
     const imagesList = useSelector(state => state.update.imagesList)
-    const downloadedIds = useSelector(state => state.set.downloadedIds)
-
-    const viewModeList = [{ name: 'grid', icon: <ReplayIcon style={{ fontSize: 36 }} /> }]
+    const [isPrinted, setIsPrinted] = useState(false)
 
     useEffect(() => {
         dispatch(getImagesList())
@@ -27,51 +22,60 @@ function ImageList() {
 
     return (
         <div className="image_list_page_wrapper">
-            <div className="content">
-                <div className="top_banner">
-                    <img className="image_banner" src={wedding_banner} />
-                    <div className="description_content">
-                        <h1 className="title">Steve & Yen Wedding</h1>
-                        <p className="subtitle">請在此長按儲存照片並使用拍立得列印</p>
+            <header className="header shadow">
+                <div className="banner shadow">
+                    <div>
+                        <h1 className="banner_title">Steve & Yen Wedding</h1>
+                        <p className="banner_subtitle">長按儲存照片並使用拍立得列印</p>
                     </div>
-                </div>
-                <div className="view_mode_content">
-                    {viewModeList.map((data, index) => (
-                        <div
-                            key={index}
-                            className={`view_button active`}
-                            onClick={() => {
-                                dispatch(getImagesList())
-                            }}
-                        >
-                            {data.icon}
-                        </div>
-                    ))}
-                    {/* <div
-                        className={`view_button active`}
+                    <div
+                        className="reload_btn"
                         onClick={() => {
-                            sessionStorage.clear('downloadedIds')
-                            dispatch(setDownloadedIds([]))
+                            dispatch(getImagesList())
                         }}
                     >
-                        <PrintDisabledIcon style={{ fontSize: 36 }} />
-                    </div> */}
+                        <ReplayIcon style={{ fontSize: 20, color: '#000' }} />
+                    </div>
                 </div>
-                <div className="list_content">
-                    {isArray(imagesList) &&
-                        imagesList.map((data, index) => (
-                            <ImageBox
-                                key={index}
-                                id={data.id}
-                                path={data.path}
-                                name={data.name}
-                                serial={data.serial}
-                                disabled={data.status}
-                            />
-                        ))}
+                <div className="options_wrap">
+                    <div
+                        className={`option_btn ${!isPrinted ? 'active' : ''}`}
+                        onClick={() => {
+                            setIsPrinted(false)
+                        }}
+                    >
+                        <CameraIcon style={{ fontSize: 32 }} />
+                        <p>相簿</p>
+                    </div>
+                    <div
+                        className={`option_btn ${isPrinted ? 'active' : ''}`}
+                        onClick={() => {
+                            setIsPrinted(true)
+                            dispatch(setSelectedImages([]))
+                        }}
+                    >
+                        <PrintIcon style={{ fontSize: 32 }} />
+                        <p>已列印</p>
+                    </div>
                 </div>
-                <DownloadGuide />
-            </div>
+            </header>
+            <main className="main_wrap">
+                {isArray(imagesList) &&
+                    imagesList.map(
+                        (data, index) =>
+                            isPrinted === data.status && (
+                                <ImageBox
+                                    key={index}
+                                    id={data.id}
+                                    path={data.path}
+                                    name={data.name}
+                                    serial={data.serial}
+                                    disabled={data.status}
+                                />
+                            )
+                    )}
+            </main>
+            <DownloadGuide />
             <Loading />
         </div>
     )
