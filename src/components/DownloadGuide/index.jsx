@@ -1,7 +1,7 @@
 import React from 'react'
 import './style.css'
 import { useSelector, useDispatch } from 'react-redux'
-import { setDownloadedIds, setSelectedImages, setIsLoading } from '../../store/actions/set'
+import { setSelectedImages } from '../../store/actions/set'
 import { postImagesMark } from '../../store/actions/post'
 import { isArray } from '../../functions/common'
 
@@ -23,36 +23,6 @@ function DownloadGuide() {
             dispatch(postImagesMark(id))
         })
         dispatch(setSelectedImages([]))
-        // dispatch(setDownloadedIds(_downloadedIds))
-        // sessionStorage.setItem('downloadedIds', JSON.stringify(_downloadedIds))
-        return
-        Promise.all(imageUrls.map(url => fetch(url).then(response => response.blob())))
-            .then(blobs => {
-                blobs.forEach((blob, index) => {
-                    const imageUrl = URL.createObjectURL(blob)
-                    const link = document.createElement('a')
-                    link.href = imageUrl
-                    link.download = `image${index + 1}.jpg`
-                    link.click()
-                })
-            })
-            .catch(error => console.error(error))
-            .finally(() => {
-                dispatch(setIsLoading(true))
-                Promise.all(selectedImages.map(id => dispatch(postImagesMark(id))))
-                    .catch(error => {
-                        console.error(error)
-                    })
-                    .finally(() => {
-                        dispatch(setIsLoading(false))
-                    })
-                const _downloadedIds = [...downloadedIds]
-                const _selectedImages = [...selectedImages]
-                const combined = _downloadedIds.concat(_selectedImages)
-                const uniqueArray = combined.filter((item, index) => combined.indexOf(item) === index)
-                dispatch(setDownloadedIds(uniqueArray))
-                dispatch(setSelectedImages([]))
-            })
     }
 
     return (

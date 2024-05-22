@@ -11,7 +11,6 @@ export const postImagesMark = id => async dispatch => {
             body: JSON.stringify(data)
         })
         if (response.ok) {
-            // success event
             dispatch(getImagesList())
         } else {
             const errorMessage = await response.text()
